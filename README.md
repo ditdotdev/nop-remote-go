@@ -1,6 +1,6 @@
-# About this Project
+# Titan Nop (No Operation) Provider
 
-Describe the project for users.
+This is a very simple Titan remote provider designed for automated testing.
 
 ## Contributing
 
