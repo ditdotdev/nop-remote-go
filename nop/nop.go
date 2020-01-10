@@ -14,18 +14,23 @@ import (
 type nopRemote struct {
 }
 
-func (n nopRemote) Type() string {
-	return "nop"
+func (n nopRemote) Type() (string, error) {
+	return "nop", nil
 }
 
-func (n nopRemote) FromURL(url *url.URL, additionalProperties map[string]string) (map[string]interface{}, error) {
+func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[string]interface{}, error) {
+	url, err := url.Parse(rawUrl)
+	if err != nil {
+		return nil, err
+	}
+
 	// nop remotes can only be "nop", which means everything other than "path" must be empty
 	if url.Scheme != "" || url.Host != "" || url.User != nil || url.Path != "nop" {
 		return nil, errors.New("malformed remote")
 	}
 
-	if len(additionalProperties) != 0 {
-		return nil, errors.New(fmt.Sprintf("invalid property '%s'", reflect.ValueOf(additionalProperties).MapKeys()[0].String()))
+	if len(properties) != 0 {
+		return nil, errors.New(fmt.Sprintf("invalid property '%s'", reflect.ValueOf(properties).MapKeys()[0].String()))
 	}
 
 	return map[string]interface{}{}, nil
@@ -35,7 +40,7 @@ func (n nopRemote) ToURL(properties map[string]interface{}) (string, map[string]
 	return "nop", map[string]string{}, nil
 }
 
-func (n nopRemote) GetParameters(remoteProperties map[string]interface{}) (map[string]interface{}, error) {
+func (n nopRemote) GetParameters(properties map[string]interface{}) (map[string]interface{}, error) {
 	return map[string]interface{}{}, nil
 }
 
