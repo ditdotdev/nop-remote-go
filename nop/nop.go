@@ -19,13 +19,13 @@ func (n nopRemote) Type() (string, error) {
 }
 
 func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[string]interface{}, error) {
-	url, err := url.Parse(rawUrl)
+	u, err := url.Parse(rawUrl)
 	if err != nil {
 		return nil, err
 	}
 
 	// nop remotes can only be "nop", which means everything other than "path" must be empty
-	if url.Scheme != "" || url.Host != "" || url.User != nil || url.Path != "nop" {
+	if u.Scheme != "" || u.Host != "" || u.User != nil || u.Path != "nop" {
 		return nil, errors.New("malformed remote")
 	}
 
@@ -36,12 +36,39 @@ func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[str
 	return map[string]interface{}{}, nil
 }
 
-func (n nopRemote) ToURL(properties map[string]interface{}) (string, map[string]string, error) {
+func (n nopRemote) ToURL(_ map[string]interface{}) (string, map[string]string, error) {
 	return "nop", map[string]string{}, nil
 }
 
-func (n nopRemote) GetParameters(properties map[string]interface{}) (map[string]interface{}, error) {
+func (n nopRemote) GetParameters(_ map[string]interface{}) (map[string]interface{}, error) {
 	return map[string]interface{}{}, nil
+}
+
+func (n nopRemote) ValidateRemote(properties map[string]interface{}) error {
+	for k := range properties {
+		return fmt.Errorf("invalid remote property '%s'", k)
+	}
+	return nil
+}
+
+func (n nopRemote) ValidateParameters(parameters map[string]interface{}) error {
+	for k := range parameters {
+		if k != "delay" {
+			return fmt.Errorf("invalid parameters property '%s'", k)
+		}
+	}
+	return nil
+}
+
+func (n nopRemote) ListCommits(_ map[string]interface{}, _ map[string]interface{}, _ []remote.Tag) ([]remote.Commit, error) {
+	return []remote.Commit{}, nil
+}
+
+func (n nopRemote) GetCommit(_ map[string]interface{}, _ map[string]interface{}, commitId string) (*remote.Commit, error) {
+	return &remote.Commit{
+		Id:         commitId,
+		Properties: map[string]interface{}{},
+	}, nil
 }
 
 func init() {
