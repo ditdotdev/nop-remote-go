@@ -6,7 +6,7 @@ package nop
 import (
 	"errors"
 	"fmt"
-	"github.com/titan-data/remote-sdk-go/remote"
+	"github.com/datadatdat/remote-sdk-go/remote"
 	"net/url"
 	"reflect"
 )
