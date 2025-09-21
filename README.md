@@ -3,6 +3,7 @@
 This is a very simple Titan remote provider designed for automated testing.
 
 <!-- CI test: Updated with testify v1.11.1 and improved workflows -->
+<!-- Testing CI workflow v2 with fixed triggers -->
 
 ## Contributing
 
