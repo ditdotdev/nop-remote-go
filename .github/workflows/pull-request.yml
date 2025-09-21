@@ -1,5 +1,5 @@
 #
-# Build and test on pull request - updated to force recognition
+# Build and test on pull request - updated to force recognition by GitHub Actions
 #
 name: Pull Request
 
