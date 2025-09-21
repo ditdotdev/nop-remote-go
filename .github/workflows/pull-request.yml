@@ -1,12 +1,11 @@
 #
-# Build and test on pull request - updated to force recognition by GitHub Actions
+# Build and test on pull request - updated to force recognition
 #
 name: Pull Request
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -36,13 +35,6 @@ jobs:
           GONOSUMDB: github.com/datadatdat/*
       - name: Build
         run: go build -v ./...
-        env:
-          GOPRIVATE: github.com/datadatdat/*
-          GONOPROXY: github.com/datadatdat/*
-          GONOSUMDB: github.com/datadatdat/*
-          GIT_TERMINAL_PROMPT: 0
-      - name: Build Command
-        run: go build -o build/nop ./cmd/nop
         env:
           GOPRIVATE: github.com/datadatdat/*
           GONOPROXY: github.com/datadatdat/*
