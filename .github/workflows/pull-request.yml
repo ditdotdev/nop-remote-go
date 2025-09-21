@@ -1,20 +1,36 @@
-#
+name: Pull Request#
+
 # Build and test on pull request - updated to force recognition
-#
-name: Pull Request
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+on:#
 
-jobs:
-  build:
-    name: Build and Test
-    runs-on: ubuntu-latest
+  pull_request:name: Pull Request
+
+
+
+jobs:on:
+
+  test:  pull_request:
+
+    runs-on: ubuntu-latest    types: [opened, synchronize, reopened]
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Configure Git for private modules
-        run: |
+
+      - uses: actions/checkout@v4jobs:
+
+      - uses: actions/setup-go@v5  build:
+
+        with:    name: Build and Test
+
+          go-version: '1.21'    runs-on: ubuntu-latest
+
+      - name: Build    steps:
+
+        run: go build -v ./...      - uses: actions/checkout@v4
+
+      - name: Test      - name: Configure Git for private modules
+
+        run: go test -v ./...        run: |
           git config --global url."https://x-access-token:${{ secrets.GO_MODULES_TOKEN }}@github.com/".insteadOf "https://github.com/"
           git config --global credential.helper store
           echo "https://x-access-token:${{ secrets.GO_MODULES_TOKEN }}@github.com" > ~/.git-credentials
