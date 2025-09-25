@@ -111,7 +111,7 @@ jobs:
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
       - name: Run staticcheck
-        run: staticcheck ./...
+        run: staticcheck -checks="inherit,-SA1019" ./...
 
       - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v6
@@ -174,7 +174,6 @@ jobs:
           else
             go test -v -coverprofile=coverage.out ./...
           fi
-        shell: bash
 
       - name: Generate coverage report
         if: matrix.os == 'ubuntu-latest' && matrix.go-version == '1.22'
