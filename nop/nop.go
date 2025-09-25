@@ -14,14 +14,14 @@ import (
 
 const remoteType = "nop"
 
-type nopRemote struct {
-}
+type nopRemote struct{}
 
 // Type returns the remote type identifier
 func (n nopRemote) Type() (string, error) {
 	return remoteType, nil
 }
 
+// FromURL parses a URL and converts it to remote properties
 func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[string]interface{}, error) {
 	u, err := url.Parse(rawUrl)
 	if err != nil {
