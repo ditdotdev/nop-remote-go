@@ -9,3 +9,8 @@
 
 # Build artifacts
 /build
+
+# Test and coverage artifacts
+coverage.out
+coverage.html
+go.list
