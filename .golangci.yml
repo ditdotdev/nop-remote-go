@@ -7,7 +7,8 @@ run:
   go: '1.22'
 
 output:
-  format: colored-line-number
+  formats:
+    - format: colored-line-number
   print-issued-lines: true
   print-linter-name: true
 
@@ -32,7 +33,7 @@ linters:
     - wsl
     - predeclared
     - nolintlint
-    - exportloopref
+    - copyloopvar
     - gocritic
 
 linters-settings:
