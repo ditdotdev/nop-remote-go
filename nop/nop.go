@@ -30,7 +30,7 @@ func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[str
 	}
 
 	if len(properties) != 0 {
-		return nil, errors.New(fmt.Sprintf("invalid property '%s'", reflect.ValueOf(properties).MapKeys()[0].String()))
+		return nil, fmt.Errorf("invalid property '%s'", reflect.ValueOf(properties).MapKeys()[0].String())
 	}
 
 	return map[string]interface{}{}, nil
