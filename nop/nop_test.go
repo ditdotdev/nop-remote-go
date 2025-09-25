@@ -4,9 +4,10 @@
 package nop
 
 import (
-	"github.com/stretchr/testify/assert"
-	"github.com/datadatdat/remote-sdk-go/remote"
 	"testing"
+
+	"github.com/datadatdat/remote-sdk-go/remote"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestRegistered(t *testing.T) {
@@ -18,6 +19,7 @@ func TestRegistered(t *testing.T) {
 func TestFromURL(t *testing.T) {
 	r := remote.Get("nop")
 	res, err := r.FromURL("nop", map[string]string{})
+
 	if assert.NoError(t, err) {
 		assert.Equal(t, 0, len(res))
 		assert.Nil(t, err)
@@ -45,6 +47,7 @@ func TestBadProperty(t *testing.T) {
 func TestToURL(t *testing.T) {
 	r := remote.Get("nop")
 	u, props, err := r.ToURL(map[string]interface{}{})
+
 	if assert.NoError(t, err) {
 		assert.Equal(t, "nop", u)
 		assert.Empty(t, props)
@@ -54,6 +57,7 @@ func TestToURL(t *testing.T) {
 func TestGetParameters(t *testing.T) {
 	r := remote.Get("nop")
 	res, err := r.GetParameters(map[string]interface{}{})
+
 	if assert.NoError(t, err) {
 		assert.Empty(t, res)
 	}
@@ -86,6 +90,7 @@ func TestValidateParametersFailure(t *testing.T) {
 func TestListCommits(t *testing.T) {
 	r := remote.Get("nop")
 	res, err := r.ListCommits(map[string]interface{}{}, map[string]interface{}{}, []remote.Tag{})
+
 	if assert.NoError(t, err) {
 		assert.Len(t, res, 0)
 	}
@@ -94,6 +99,7 @@ func TestListCommits(t *testing.T) {
 func TestGetCommit(t *testing.T) {
 	r := remote.Get("nop")
 	res, err := r.GetCommit(map[string]interface{}{}, map[string]interface{}{}, "id")
+
 	if assert.NoError(t, err) {
 		assert.Equal(t, "id", res.Id)
 		assert.Len(t, res.Properties, 0)
