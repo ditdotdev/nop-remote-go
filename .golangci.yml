@@ -4,11 +4,11 @@
 run:
   timeout: 5m
   modules-download-mode: readonly
-  go: '1.22'
+  go: '1.25'
 
 output:
   formats:
-    - format: colored-line-number
+    colored-line-number: stdout
   print-issued-lines: true
   print-linter-name: true
 
