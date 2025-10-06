@@ -5,4 +5,4 @@ require (
 	github.com/stretchr/testify v1.11.1
 )
 
-go 1.13
+go 1.25.1
