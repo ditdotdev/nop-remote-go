@@ -78,7 +78,7 @@ func (n nopRemote) ListCommits(_ map[string]interface{}, _ map[string]interface{
 // GetCommit retrieves a specific commit from the remote
 func (n nopRemote) GetCommit(_ map[string]interface{}, _ map[string]interface{}, commitId string) (*remote.Commit, error) {
 	return &remote.Commit{
-		Id:         commitId,
+		ID:         commitId,
 		Properties: map[string]interface{}{},
 	}, nil
 }

@@ -101,7 +101,7 @@ func TestGetCommit(t *testing.T) {
 	res, err := r.GetCommit(map[string]interface{}{}, map[string]interface{}{}, "id")
 
 	if assert.NoError(t, err) {
-		assert.Equal(t, "id", res.Id)
+		assert.Equal(t, "id", res.ID)
 		assert.Len(t, res.Properties, 0)
 	}
 }
