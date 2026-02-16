@@ -105,3 +105,26 @@ func TestGetCommit(t *testing.T) {
 		assert.Len(t, res.Properties, 0)
 	}
 }
+
+func TestPush(t *testing.T) {
+	n := nopRemote{}
+	err := n.Push(map[string]interface{}{}, map[string]interface{}{}, []remote.Commit{}, []remote.Tag{})
+	assert.NoError(t, err)
+}
+
+func TestListTags(t *testing.T) {
+	n := nopRemote{}
+	tags, err := n.ListTags(map[string]interface{}{}, map[string]interface{}{})
+	if assert.NoError(t, err) {
+		assert.Empty(t, tags)
+	}
+}
+
+func TestGetTag(t *testing.T) {
+	n := nopRemote{}
+	tag, err := n.GetTag(map[string]interface{}{}, map[string]interface{}{}, "myTag")
+	if assert.NoError(t, err) {
+		assert.Equal(t, "myTag", tag.Key)
+		assert.Nil(t, tag.Value)
+	}
+}
