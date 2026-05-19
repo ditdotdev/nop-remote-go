@@ -38,6 +38,15 @@ func TestFromURL(t *testing.T) {
 	}
 }
 
+func TestFromURLNilProperties(t *testing.T) {
+	r := getNopRemote(t)
+	res, err := r.FromURL("nop", nil)
+
+	if assert.NoError(t, err) {
+		assert.Equal(t, 0, len(res))
+	}
+}
+
 func TestBadUrl(t *testing.T) {
 	r := getNopRemote(t)
 	_, err := r.FromURL("not\nurl", map[string]string{})
@@ -68,9 +77,28 @@ func TestToURL(t *testing.T) {
 	}
 }
 
+func TestToURLNilProperties(t *testing.T) {
+	r := getNopRemote(t)
+	u, props, err := r.ToURL(nil)
+
+	if assert.NoError(t, err) {
+		assert.Equal(t, "nop", u)
+		assert.Empty(t, props)
+	}
+}
+
 func TestGetParameters(t *testing.T) {
 	r := getNopRemote(t)
 	res, err := r.GetParameters(map[string]interface{}{})
+
+	if assert.NoError(t, err) {
+		assert.Empty(t, res)
+	}
+}
+
+func TestGetParametersNilProperties(t *testing.T) {
+	r := getNopRemote(t)
+	res, err := r.GetParameters(nil)
 
 	if assert.NoError(t, err) {
 		assert.Empty(t, res)
@@ -83,6 +111,12 @@ func TestValidateRemoteSuccess(t *testing.T) {
 	assert.NoError(t, err)
 }
 
+func TestValidateRemoteNilProperties(t *testing.T) {
+	r := getNopRemote(t)
+	err := r.ValidateRemote(nil)
+	assert.NoError(t, err)
+}
+
 func TestValidateRemoteFailure(t *testing.T) {
 	r := getNopRemote(t)
 	err := r.ValidateRemote(map[string]interface{}{"a": "b"})
@@ -92,6 +126,18 @@ func TestValidateRemoteFailure(t *testing.T) {
 func TestValidateParametersSuccess(t *testing.T) {
 	r := getNopRemote(t)
 	err := r.ValidateParameters(map[string]interface{}{})
+	assert.NoError(t, err)
+}
+
+func TestValidateParametersNilParameters(t *testing.T) {
+	r := getNopRemote(t)
+	err := r.ValidateParameters(nil)
+	assert.NoError(t, err)
+}
+
+func TestValidateParametersDelayAllowed(t *testing.T) {
+	r := getNopRemote(t)
+	err := r.ValidateParameters(map[string]interface{}{"delay": "5"})
 	assert.NoError(t, err)
 }
 
