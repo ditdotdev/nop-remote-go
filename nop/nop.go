@@ -16,12 +16,12 @@ const remoteType = "nop"
 type nopRemote struct{}
 
 // Type returns the remote type identifier
-func (n nopRemote) Type() (string, error) {
+func (nopRemote) Type() (string, error) {
 	return remoteType, nil
 }
 
 // FromURL parses a URL and converts it to remote properties
-func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[string]interface{}, error) {
+func (nopRemote) FromURL(rawUrl string, properties map[string]string) (map[string]interface{}, error) {
 	u, err := url.Parse(rawUrl)
 	if err != nil {
 		return nil, err
@@ -40,17 +40,17 @@ func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[str
 }
 
 // ToURL converts remote properties back to URL format
-func (n nopRemote) ToURL(_ map[string]interface{}) (string, map[string]string, error) {
+func (nopRemote) ToURL(_ map[string]interface{}) (string, map[string]string, error) {
 	return remoteType, map[string]string{}, nil
 }
 
 // GetParameters returns the parameters for remote operations
-func (n nopRemote) GetParameters(_ map[string]interface{}) (map[string]interface{}, error) {
+func (nopRemote) GetParameters(_ map[string]interface{}) (map[string]interface{}, error) {
 	return map[string]interface{}{}, nil
 }
 
 // ValidateRemote validates remote configuration properties
-func (n nopRemote) ValidateRemote(properties map[string]interface{}) error {
+func (nopRemote) ValidateRemote(properties map[string]interface{}) error {
 	for k := range properties {
 		return fmt.Errorf("invalid remote property '%s'", k)
 	}
@@ -59,7 +59,7 @@ func (n nopRemote) ValidateRemote(properties map[string]interface{}) error {
 }
 
 // ValidateParameters validates operation parameters
-func (n nopRemote) ValidateParameters(parameters map[string]interface{}) error {
+func (nopRemote) ValidateParameters(parameters map[string]interface{}) error {
 	for k := range parameters {
 		if k != "delay" {
 			return fmt.Errorf("invalid parameters property '%s'", k)
@@ -70,12 +70,12 @@ func (n nopRemote) ValidateParameters(parameters map[string]interface{}) error {
 }
 
 // ListCommits returns a list of commits from the remote
-func (n nopRemote) ListCommits(_ map[string]interface{}, _ map[string]interface{}, _ []remote.Tag) ([]remote.Commit, error) {
+func (nopRemote) ListCommits(_ map[string]interface{}, _ map[string]interface{}, _ []remote.Tag) ([]remote.Commit, error) {
 	return []remote.Commit{}, nil
 }
 
 // GetCommit retrieves a specific commit from the remote
-func (n nopRemote) GetCommit(_ map[string]interface{}, _ map[string]interface{}, commitId string) (*remote.Commit, error) {
+func (nopRemote) GetCommit(_ map[string]interface{}, _ map[string]interface{}, commitId string) (*remote.Commit, error) {
 	return &remote.Commit{
 		ID:         commitId,
 		Properties: map[string]interface{}{},
