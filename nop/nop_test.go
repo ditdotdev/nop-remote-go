@@ -41,7 +41,9 @@ func TestBadAuthority(t *testing.T) {
 func TestBadProperty(t *testing.T) {
 	r, _ := remote.Get("nop")
 	_, err := r.FromURL("nop", map[string]string{"a": "b"})
-	assert.Error(t, err)
+	if assert.Error(t, err) {
+		assert.Contains(t, err.Error(), "'a'")
+	}
 }
 
 func TestToURL(t *testing.T) {

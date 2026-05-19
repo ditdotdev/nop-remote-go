@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
-	"reflect"
 
 	"github.com/datadatdat/remote-sdk-go/remote"
 )
@@ -33,8 +32,8 @@ func (n nopRemote) FromURL(rawUrl string, properties map[string]string) (map[str
 		return nil, errors.New("malformed remote")
 	}
 
-	if len(properties) != 0 {
-		return nil, fmt.Errorf("invalid property '%s'", reflect.ValueOf(properties).MapKeys()[0].String())
+	for k := range properties {
+		return nil, fmt.Errorf("invalid property '%s'", k)
 	}
 
 	return map[string]interface{}{}, nil
