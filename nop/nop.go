@@ -82,21 +82,6 @@ func (n nopRemote) GetCommit(_ map[string]interface{}, _ map[string]interface{},
 	}, nil
 }
 
-// Push sends commits and tags to the remote
-func (n nopRemote) Push(_ map[string]interface{}, _ map[string]interface{}, commits []remote.Commit, tags []remote.Tag) error {
-	return nil
-}
-
-// ListTags returns a list of tags from the remote
-func (n nopRemote) ListTags(_ map[string]interface{}, _ map[string]interface{}) ([]remote.Tag, error) {
-	return []remote.Tag{}, nil
-}
-
-// GetTag retrieves a specific tag from the remote
-func (n nopRemote) GetTag(_ map[string]interface{}, _ map[string]interface{}, tagName string) (*remote.Tag, error) {
-	return &remote.Tag{Key: tagName, Value: nil}, nil
-}
-
 func init() {
 	remote.Register(nopRemote{})
 }
