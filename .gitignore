@@ -14,3 +14,7 @@
 coverage.out
 coverage.html
 go.list
+
+# Coverage profiles + local repo-health output
+cov*.out
+.health/
