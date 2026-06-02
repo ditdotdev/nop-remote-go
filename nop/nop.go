@@ -1,5 +1,5 @@
 /*
- * Copyright Datadatdat.
+ * Copyright Dit.
  */
 package nop
 
@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/datadatdat/remote-sdk-go/remote"
+	"github.com/ditdotdev/remote-sdk-go/remote"
 )
 
 const remoteType = "nop"
