@@ -1,9 +1,9 @@
 /*
- * Copyright Datadatdat.
+ * Copyright Dit.
  */
 package main
 
-import "github.com/datadatdat/remote-sdk-go/remote"
+import "github.com/ditdotdev/remote-sdk-go/remote"
 
 func main() {
 	remote.Serve("nop")
